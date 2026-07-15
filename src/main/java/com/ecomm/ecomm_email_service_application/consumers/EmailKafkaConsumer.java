@@ -18,7 +18,7 @@ public class EmailKafkaConsumer {
         this.emailService = emailService;
     }
 
-    @KafkaListener(topics = "signup", groupId = "emailService")
+    @KafkaListener(topics = "email", groupId = "emailService")
     public void sendEmail(String message) throws Exception {
 
         EmailDto dto = objectMapper.readValue(message, EmailDto.class);

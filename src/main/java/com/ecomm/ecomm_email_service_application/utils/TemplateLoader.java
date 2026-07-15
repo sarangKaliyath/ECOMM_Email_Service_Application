@@ -4,6 +4,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @Component
 public class TemplateLoader {
@@ -15,5 +16,15 @@ public class TemplateLoader {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load template " + templateName, e);
         }
+    }
+
+    public String replace(String template, Map<String, String> variables){
+        String res = template;
+
+        for(Map.Entry<String, String> entry : variables.entrySet()){
+            res = res.replace("{{" + entry.getKey() + "}}", entry.getValue());
+        }
+
+        return res;
     }
 }
